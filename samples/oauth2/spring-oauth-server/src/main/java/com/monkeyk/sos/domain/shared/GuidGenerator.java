@@ -11,20 +11,19 @@ import java.util.UUID;
  */
 public abstract class GuidGenerator {
 
-    private static RandomValueStringGenerator defaultClientSecretGenerator = new RandomValueStringGenerator(32);
+	private static RandomValueStringGenerator defaultClientSecretGenerator = new RandomValueStringGenerator(32);
 
-    /**
-     * private constructor
-     */
-    private GuidGenerator() {
-    }
+	/**
+	 * private constructor
+	 */
+	private GuidGenerator() {
+	}
 
-    public static String generate() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
-    }
+	public static String generate() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
 
-
-    public static String generateClientSecret() {
-        return defaultClientSecretGenerator.generate();
-    }
+	public static String generateClientSecret() {
+		return defaultClientSecretGenerator.generate();
+	}
 }

@@ -18,7 +18,12 @@
 </h2>
 
 <p>
-    <a href="${contextPath}/login.jsp">Login</a>
+	<c:if test="${SPRING_SECURITY_CONTEXT.authentication.principal.username != null}">
+		欢迎你: ${SPRING_SECURITY_CONTEXT.authentication.principal.username}
+	</c:if>
+	<c:if test="${SPRING_SECURITY_CONTEXT.authentication.principal.username == null}">
+    	<a href="${contextPath}/login.jsp">Login</a>
+    </c:if>
     &nbsp;|&nbsp;
     <a href="${contextPath}/logout.do">Logout</a>
 </p>
@@ -34,9 +39,9 @@
         <li>
             <p>
                 菜单 Unity 与 Mobile 需要OAuth 验证后才能访问(即受保护的resource); <br/>
-                Unity 需要 [ROLE_UNITY] 权限(resourceId:
+                Unity   需要 [ROLE_UNITY] 权限(resourceId:
                 <mark>unity-resource</mark>
-                ), Mobile 需要 [ROLE_MOBILE] 权限(resourceId:
+                )<br/> Mobile 需要 [ROLE_MOBILE] 权限(resourceId:
                 <mark>mobile-resource</mark>
                 ).
             </p>
@@ -83,13 +88,13 @@
     </li>
     <li>
         <p>
-            <a href="${contextPath}/unity/dashboard">Unity</a> <span class="text-muted">- Unity 资源(resource), 需要具有 [ROLE_UNITY] 权限(resourceId:
+            <a href="${contextPath}/unity/dashboard?access_token=7caf91e4-ddb4-4e70-9644-d49b1cb08a10">Unity</a> <span class="text-muted">- Unity 资源(resource), 需要具有 [ROLE_UNITY] 权限(resourceId:
                 <mark>unity-resource</mark>才能访问</span>
         </p>
     </li>
     <li>
         <p>
-            <a href="${contextPath}/m/dashboard">Mobile</a> <span class="text-muted">- Mobile资源(resource), 需要具有 [ROLE_MOBILE] 权限(resourceId:
+            <a href="${contextPath}/m/dashboard?access_token=7caf91e4-ddb4-4e70-9644-d49b1cb08a10">Mobile</a> <span class="text-muted">- Mobile资源(resource), 需要具有 [ROLE_MOBILE] 权限(resourceId:
                 <mark>mobile-resource</mark>才能访问</span>
         </p>
     </li>
@@ -106,7 +111,7 @@
     <p>
         请求受保护的资源时传递
         <mark>Access Token</mark>
-        有两种方式, 方式一在URL参数中添加<code>access_token</code>, 方式二在请求的Header中添加 <em>Authorization</em>, 其值为 <em>bearer
+        有两种方式, <br/>方式一：在URL参数中添加<code>access_token</code> <br/>方式二：在请求的Header中添加 <em>Authorization</em>, 其值为 <em>bearer
         your_access_token</em>
     </p>
 </div>

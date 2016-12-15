@@ -117,7 +117,7 @@
     <!--contextConfigLocation -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/*.xml</param-value>
+        <param-value>classpath:/spring/spring-application.xml</param-value>
     </context-param>
     <context-param>
         <param-name>log4jConfigLocation</param-name>
@@ -145,12 +145,16 @@
     -->
     <!--mvc-->
     <servlet>
-        <servlet-name>mkk</servlet-name>
+        <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:/spring/spring-mvc.xml</param-value>
+        </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>mkk</servlet-name>
+        <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

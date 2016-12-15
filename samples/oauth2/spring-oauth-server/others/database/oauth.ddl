@@ -1,66 +1,66 @@
 --
---  Oauth sql  -- MYSQL
+--  OAUTH SQL  -- MYSQL
 --
 
-Drop table  if exists oauth_client_details;
-create table oauth_client_details (
-  client_id VARCHAR(255) PRIMARY KEY,
-  resource_ids VARCHAR(255),
-  client_secret VARCHAR(255),
-  scope VARCHAR(255),
-  authorized_grant_types VARCHAR(255),
-  web_server_redirect_uri VARCHAR(255),
-  authorities VARCHAR(255),
-  access_token_validity INTEGER,
-  refresh_token_validity INTEGER,
-  additional_information TEXT,
-  create_time timestamp default now(),
-  archived tinyint(1) default '0',
-  trusted tinyint(1) default '0',
-  autoapprove VARCHAR (255) default 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE  IF EXISTS OAUTH_CLIENT_DETAILS;
+CREATE TABLE OAUTH_CLIENT_DETAILS (
+  CLIENT_ID VARCHAR(255) PRIMARY KEY,
+  RESOURCE_IDS VARCHAR(255),
+  CLIENT_SECRET VARCHAR(255),
+  SCOPE VARCHAR(255),
+  AUTHORIZED_GRANT_TYPES VARCHAR(255),
+  WEB_SERVER_REDIRECT_URI VARCHAR(255),
+  AUTHORITIES VARCHAR(255),
+  ACCESS_TOKEN_VALIDITY INTEGER,
+  REFRESH_TOKEN_VALIDITY INTEGER,
+  ADDITIONAL_INFORMATION TEXT,
+  CREATE_TIME TIMESTAMP DEFAULT NOW(),
+  ARCHIVED TINYINT(1) DEFAULT '0',
+  TRUSTED TINYINT(1) DEFAULT '0',
+  AUTOAPPROVE VARCHAR (255) DEFAULT 'FALSE'
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
-Drop table  if exists oauth_access_token;
-create table oauth_access_token (
-  create_time timestamp default now(),
-  token_id VARCHAR(255),
-  token BLOB,
-  authentication_id VARCHAR(255),
-  user_name VARCHAR(255),
-  client_id VARCHAR(255),
-  authentication BLOB,
-  refresh_token VARCHAR(255)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE  IF EXISTS OAUTH_ACCESS_TOKEN;
+CREATE TABLE OAUTH_ACCESS_TOKEN (
+  CREATE_TIME TIMESTAMP DEFAULT NOW(),
+  TOKEN_ID VARCHAR(255),
+  TOKEN BLOB,
+  AUTHENTICATION_ID VARCHAR(255),
+  USER_NAME VARCHAR(255),
+  CLIENT_ID VARCHAR(255),
+  AUTHENTICATION BLOB,
+  REFRESH_TOKEN VARCHAR(255)
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
-Drop table  if exists oauth_refresh_token;
-create table oauth_refresh_token (
-  create_time timestamp default now(),
-  token_id VARCHAR(255),
-  token BLOB,
-  authentication BLOB
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE  IF EXISTS OAUTH_REFRESH_TOKEN;
+CREATE TABLE OAUTH_REFRESH_TOKEN (
+  CREATE_TIME TIMESTAMP DEFAULT NOW(),
+  TOKEN_ID VARCHAR(255),
+  TOKEN BLOB,
+  AUTHENTICATION BLOB
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
-Drop table  if exists oauth_code;
-create table oauth_code (
-  create_time timestamp default now(),
-  code VARCHAR(255),
-  authentication BLOB
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE  IF EXISTS OAUTH_CODE;
+CREATE TABLE OAUTH_CODE (
+  CREATE_TIME TIMESTAMP DEFAULT NOW(),
+  CODE VARCHAR(255),
+  AUTHENTICATION BLOB
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
 
--- Add indexes
-create index token_id_index on oauth_access_token (token_id);
-create index authentication_id_index on oauth_access_token (authentication_id);
-create index user_name_index on oauth_access_token (user_name);
-create index client_id_index on oauth_access_token (client_id);
-create index refresh_token_index on oauth_access_token (refresh_token);
+-- ADD INDEXES
+CREATE INDEX TOKEN_ID_INDEX ON OAUTH_ACCESS_TOKEN (TOKEN_ID);
+CREATE INDEX AUTHENTICATION_ID_INDEX ON OAUTH_ACCESS_TOKEN (AUTHENTICATION_ID);
+CREATE INDEX USER_NAME_INDEX ON OAUTH_ACCESS_TOKEN (USER_NAME);
+CREATE INDEX CLIENT_ID_INDEX ON OAUTH_ACCESS_TOKEN (CLIENT_ID);
+CREATE INDEX REFRESH_TOKEN_INDEX ON OAUTH_ACCESS_TOKEN (REFRESH_TOKEN);
 
-create index token_id_index on oauth_refresh_token (token_id);
+CREATE INDEX TOKEN_ID_INDEX ON OAUTH_REFRESH_TOKEN (TOKEN_ID);
 
-create index code_index on oauth_code (code);
+CREATE INDEX CODE_INDEX ON OAUTH_CODE (CODE);
 
 

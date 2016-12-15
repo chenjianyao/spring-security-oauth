@@ -31,7 +31,7 @@ CREATE TABLE user_ (
 -- ###############
 -- Domain:  Privilege
 -- ###############
-Drop table  if exists user_privilege;
+Drop table  if exists USER_PRIVILEGE;
 CREATE TABLE user_privilege (
   user_id int(11),
   privilege varchar(255),

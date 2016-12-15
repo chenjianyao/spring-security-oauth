@@ -10,34 +10,29 @@ import com.monkeyk.sos.infrastructure.PasswordHandler;
  * @author Shengzhao Li
  */
 public class UserFormDto extends UserDto {
-    private static final long serialVersionUID = 7959857016962260738L;
+	private static final long serialVersionUID = 7959857016962260738L;
 
+	private String password;
 
-    private String password;
+	public UserFormDto() {
+	}
 
-    public UserFormDto() {
-    }
+	public Privilege[] getAllPrivileges() {
+		return new Privilege[] { Privilege.MOBILE, Privilege.UNITY };
+	}
 
+	public String getPassword() {
+		return password;
+	}
 
-    public Privilege[] getAllPrivileges() {
-        return new Privilege[]{Privilege.MOBILE, Privilege.UNITY};
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User newUser() {
-        final User user = new User()
-                .username(getUsername())
-                .phone(getPhone())
-                .email(getEmail())
-                .password(PasswordHandler.md5(getPassword()));
-        user.privileges().addAll(getPrivileges());
-        return user;
-    }
+	public User newUser() {
+		final User user = new User().username(getUsername()).phone(getPhone()).email(getEmail())
+				.password(PasswordHandler.md5(getPassword()));
+		user.privileges().addAll(getPrivileges());
+		return user;
+	}
 }
